@@ -1,0 +1,17 @@
+{
+  "name": "optimize-sdk-monorepo",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Fleetwork Optimize SDK — framework-agnostic core (@vietmap/optimize-sdk) + React bindings + web components.",
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "changeset": "changeset",
+    "changeset:version": "changeset version",
+    "release": "pnpm -r build && changeset publish"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@changesets/cli": "^3.0.2"
+  }
+}

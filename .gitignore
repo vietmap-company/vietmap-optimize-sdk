@@ -1,0 +1,12 @@
+node_modules
+dist
+coverage
+*.local
+.DS_Store
+._*
+*.tsbuildinfo
+.env
+.env.*
+!.env.example
+# demo secrets (real keys) — keep out of git
+keys.local.js
