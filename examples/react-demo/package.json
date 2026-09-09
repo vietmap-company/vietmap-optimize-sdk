@@ -9,8 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vietmap/optimize-sdk-elements": "workspace:*",
-    "@vietmap/optimize-sdk-react": "workspace:*",
+    "@vietmap/optimize-sdk": "workspace:*",
     "react": "^19.2.5",
     "react-dom": "^19.2.5"
   },

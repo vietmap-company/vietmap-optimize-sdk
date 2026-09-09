@@ -5,4 +5,4 @@ export type { MapRoute, MapStop } from './route-map'
 
 // The domain model, `buildRequest`, and the headless OptimizePlannerController
 // all live in core; re-export them so consumers need only one import.
-export * from '@vietmap/optimize-sdk'
+export * from '../index'

@@ -2,8 +2,8 @@
 import { computed, ref } from 'vue'
 // Register the custom elements. Vue needs no JSX typings — the only framework
 // glue is the `isCustomElement` option in vite.config.ts.
-import '@vietmap/optimize-sdk-elements'
-import type { PlannerJobInput, PlannerVehicle } from '@vietmap/optimize-sdk-elements'
+import '@vietmap/optimize-sdk/elements'
+import type { PlannerJobInput, PlannerVehicle } from '@vietmap/optimize-sdk/elements'
 
 // Keys come from a gitignored .env.local (copy .env.example) — never committed.
 const API_KEY = import.meta.env.VITE_OPTIMIZE_KEY ?? ''

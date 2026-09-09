@@ -1,7 +1,7 @@
 import { useState } from 'react'
 // One idiomatic React component — pass vehicles + a single `jobs` list as PROPS.
-import { OptimizePlanner } from '@vietmap/optimize-sdk-react'
-import type { PlannerJobInput, PlannerVehicle } from '@vietmap/optimize-sdk-react'
+import { OptimizePlanner } from '@vietmap/optimize-sdk/react'
+import type { PlannerJobInput, PlannerVehicle } from '@vietmap/optimize-sdk/react'
 
 // Keys come from a gitignored .env.local (copy .env.example) — never committed.
 const API_KEY = import.meta.env.VITE_OPTIMIZE_KEY ?? '' // X-API-Key (optimize)

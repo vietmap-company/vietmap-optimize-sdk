@@ -1,10 +1,7 @@
 {
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "baseUrl": ".",
-    "paths": {
-      "@vietmap/optimize-sdk": ["../core/src/index"]
-    }
+    "useDefineForClassFields": false
   },
   "include": ["src"]
 }

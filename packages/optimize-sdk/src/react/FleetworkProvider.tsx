@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { VietmapOptimize } from '@vietmap/optimize-sdk'
-import type { AuthErrorEvent } from '@vietmap/optimize-sdk'
+import { VietmapOptimize } from '../index'
+import type { AuthErrorEvent } from '../index'
 
 interface FleetworkContextValue {
   client: VietmapOptimize

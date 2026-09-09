@@ -14,12 +14,9 @@ importers:
 
   examples/react-demo:
     dependencies:
-      '@vietmap/optimize-sdk-elements':
+      '@vietmap/optimize-sdk':
         specifier: workspace:*
-        version: link:../../packages/elements
-      '@vietmap/optimize-sdk-react':
-        specifier: workspace:*
-        version: link:../../packages/react
+        version: link:../../packages/optimize-sdk
       react:
         specifier: ^19.2.5
         version: 19.2.8
@@ -45,9 +42,9 @@ importers:
 
   examples/vue-demo:
     dependencies:
-      '@vietmap/optimize-sdk-elements':
+      '@vietmap/optimize-sdk':
         specifier: workspace:*
-        version: link:../../packages/elements
+        version: link:../../packages/optimize-sdk
       vue:
         specifier: ^3.5.13
         version: 3.5.42(typescript@6.0.3)
@@ -62,45 +59,11 @@ importers:
         specifier: ^8.0.10
         version: 8.2.2(esbuild@0.27.7)(yaml@2.9.0)
 
-  packages/core:
-    devDependencies:
-      tsup:
-        specifier: ^8.0.0
-        version: 8.5.1(postcss@8.5.28)(typescript@6.0.3)(yaml@2.9.0)
-      typescript:
-        specifier: ~6.0.2
-        version: 6.0.3
-
-  packages/elements:
+  packages/optimize-sdk:
     dependencies:
-      '@vietmap/optimize-sdk':
-        specifier: workspace:*
-        version: link:../core
       lit:
         specifier: ^3.2.1
         version: 3.3.3
-      react:
-        specifier: '>=18'
-        version: 19.2.8
-    devDependencies:
-      '@types/react':
-        specifier: ^19.0.0
-        version: 19.2.18
-      tsup:
-        specifier: ^8.0.0
-        version: 8.5.1(postcss@8.5.28)(typescript@6.0.3)(yaml@2.9.0)
-      typescript:
-        specifier: ~6.0.2
-        version: 6.0.3
-
-  packages/react:
-    dependencies:
-      '@vietmap/optimize-sdk':
-        specifier: workspace:*
-        version: link:../core
-      '@vietmap/optimize-sdk-elements':
-        specifier: workspace:*
-        version: link:../elements
     devDependencies:
       '@types/react':
         specifier: ^19.2.14

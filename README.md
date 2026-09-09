@@ -1,32 +1,32 @@
 # Optimize SDK (Fleetwork)
 
-SDK cho **Fleetwork Optimize API** — định tuyến xe (VROOM-style VRP / auto-assign) trên public `/api/v1/optimize`. Monorepo pnpm: một **core framework-agnostic** + lớp **React** + bộ **web components**, đều kế thừa core.
+SDK cho **Fleetwork Optimize API** — định tuyến xe (VROOM-style VRP / auto-assign) trên public `/api/v1/optimize`. **Một package duy nhất** `@vietmap/optimize-sdk` với 3 entry: **core** framework-agnostic, bộ **web components**, và lớp **React** — cài 1 gói, import đúng phần bạn cần.
 
-| Package | Thư mục | Dùng cho |
-| --- | --- | --- |
-| [`@vietmap/optimize-sdk`](packages/core) | `packages/core` | Vanilla / mọi framework / Node — class `VietmapOptimize`, mô hình domain + `buildRequest`, và **`OptimizePlannerController` headless**. `fetch`, zero-dep, có IIFE cho `<script>`/CDN. |
-| [`@vietmap/optimize-sdk-react`](packages/react) | `packages/react` | React — `<FleetworkProvider>` + `useOptimize()`. |
-| [`@vietmap/optimize-sdk-elements`](packages/elements) | `packages/elements` | Web component `<vietmap-optimize-planner>` / `<vietmap-route-map>` (Lit) — dùng ở mọi framework + vanilla. |
-| `react-demo` | `examples/react-demo` | Ví dụ React nhúng web component (cổng 5180). |
-| `vue-demo` | `examples/vue-demo` | Ví dụ Vue 3 nhúng web component (cổng 5181). |
+| Entry (import) | Dùng cho |
+| --- | --- |
+| `@vietmap/optimize-sdk` | Core headless — class `VietmapOptimize`, mô hình domain + `buildRequest`, và **`OptimizePlannerController` headless**. `fetch`, zero-dep, có IIFE cho `<script>`/CDN. |
+| `@vietmap/optimize-sdk/elements` | Web component `<vietmap-optimize-planner>` / `<vietmap-route-map>` (Lit) — dùng ở mọi framework + vanilla. |
+| `@vietmap/optimize-sdk/react` | React — `<OptimizePlanner>` (props) + `<FleetworkProvider>` / `useOptimize()`. |
+
+Ví dụ: `examples/react-demo` (cổng 5180) · `examples/vue-demo` (cổng 5181).
 
 API docs: https://fleetwork.vn/docs/sdk/optimize-api
 
 ## Cài đặt
 
 ```bash
-# Web component (mọi framework + vanilla)
-npm i @vietmap/optimize-sdk-elements
-# Headless / chỉ cần types + controller
 npm i @vietmap/optimize-sdk
-# React bindings (hook)
-npm i @vietmap/optimize-sdk-react
 ```
 
-Hoặc dùng qua CDN không cần bundler (bản IIFE, global `VietmapOptimizeElements` / `VietmapOptimizeSDK`):
+Một gói, import theo nhu cầu: `@vietmap/optimize-sdk` (core) · `@vietmap/optimize-sdk/elements` (web component) · `@vietmap/optimize-sdk/react` (React). Core zero-dep; `lit` đi kèm cho phần web component; `react` là **optional peer** (chỉ cần khi dùng entry `/react`).
+
+Hoặc dùng qua CDN không cần bundler (bản IIFE):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/@vietmap/optimize-sdk-elements/dist/index.global.js"></script>
+<!-- core (headless) — global VietmapOptimizeSDK -->
+<script src="https://cdn.jsdelivr.net/npm/@vietmap/optimize-sdk/dist/index.global.js"></script>
+<!-- web components — global VietmapOptimizeElements -->
+<script src="https://cdn.jsdelivr.net/npm/@vietmap/optimize-sdk/dist/elements/index.global.js"></script>
 ```
 
 ## Mô hình dữ liệu
@@ -42,9 +42,11 @@ Không cần tự tách hay gắn `kind` — cách suy luận này khớp với 
 
 Chọn **1 ngày** → component phát `vm-daychange` → bạn tự gọi API lấy job của ngày đó rồi set **một mảng `.jobs`**. Map vẽ **tuyến của các job đã gán cho xe** (từ kho xuất phát, theo đường thật của VietMap); nhập **VietMap API key** (`tile-key`) để có nền bản đồ.
 
+Với bundler: `import '@vietmap/optimize-sdk/elements'` (đăng ký custom element). Không bundler thì dùng bản IIFE:
+
 ```html
 <vietmap-optimize-planner id="p"></vietmap-optimize-planner>
-<script src="…/@vietmap/optimize-sdk-elements/dist/index.global.js"></script>
+<script src="…/@vietmap/optimize-sdk/dist/elements/index.global.js"></script>
 <script>
   const p = document.getElementById('p')
   p.apiKey = 'X_API_KEY'          // optimize (X-API-Key)
@@ -68,7 +70,7 @@ Events: `vm-daychange` · `vm-optimize` · `vm-assignmentchange` · `vm-retime` 
 
 ## 2) Headless controller (không cần UI)
 
-Cho khách muốn **tự dựng UI** — chỉ cần `@vietmap/optimize-sdk`, không kéo theo Lit/React:
+Cho khách muốn **tự dựng UI** — chỉ cần import core `@vietmap/optimize-sdk`, không kéo theo Lit/React:
 
 ```ts
 import { OptimizePlannerController } from '@vietmap/optimize-sdk'
@@ -86,11 +88,11 @@ const plan = planner.confirm()
 
 ## 3) React
 
-Dùng component **`<OptimizePlanner>`** — truyền `vehicles` + **một mảng `jobs`** qua props, không cần ref, không tự tách service/shipment:
+Dùng component **`<OptimizePlanner>`** từ `@vietmap/optimize-sdk/react` — truyền `vehicles` + **một mảng `jobs`** qua props, không cần ref, không tự tách service/shipment:
 
 ```tsx
 import { useState } from 'react'
-import { OptimizePlanner } from '@vietmap/optimize-sdk-react'
+import { OptimizePlanner } from '@vietmap/optimize-sdk/react'
 
 function Dispatch() {
   const [day, setDay] = useState('2026-09-08')
@@ -112,10 +114,10 @@ function Dispatch() {
 
 SDK tự suy ra **service** (1 `location`) hay **shipment** (`pickup` + `delivery`) từ shape của từng job — đúng theo cách VROOM phân biệt.
 
-Đổi ngày → `onDayChange` trả về ngày mới → bạn fetch job của ngày đó rồi cập nhật `jobs` (state). Muốn dùng **raw tag** trong JSX thì `import '@vietmap/optimize-sdk-elements/react'` để có JSX types. Hoặc dùng **hook** nếu tự dựng UI:
+Đổi ngày → `onDayChange` trả về ngày mới → bạn fetch job của ngày đó rồi cập nhật `jobs` (state). Entry `@vietmap/optimize-sdk/react` cũng kèm sẵn **JSX types** cho raw tag `<vietmap-optimize-planner>` (nếu bạn thích dùng thẳng tag thay vì `<OptimizePlanner>`), và **hook** nếu tự dựng UI:
 
 ```tsx
-import { FleetworkProvider, useOptimize } from '@vietmap/optimize-sdk-react'
+import { FleetworkProvider, useOptimize } from '@vietmap/optimize-sdk/react'
 // <FleetworkProvider apiKey="X_API_KEY"><MyComponent /></FleetworkProvider>
 // const { optimize, data, isLoading, error } = useOptimize()
 ```
@@ -128,7 +130,7 @@ Khai báo tag là custom element trong `vite.config.ts`:
 vue({ template: { compilerOptions: { isCustomElement: (t) => t.startsWith('vietmap-') } } })
 ```
 
-Rồi `import '@vietmap/optimize-sdk-elements'` và bind thẳng trong template — object/array dùng modifier **`.prop`** (set DOM property), chuỗi dùng attribute, sự kiện dùng `@`. Không cần ref hay wiring thủ công (xem `examples/vue-demo`):
+Rồi `import '@vietmap/optimize-sdk/elements'` và bind thẳng trong template — object/array dùng modifier **`.prop`** (set DOM property), chuỗi dùng attribute, sự kiện dùng `@`. Không cần ref hay wiring thủ công (xem `examples/vue-demo`):
 
 ```vue
 <vietmap-optimize-planner
@@ -139,7 +141,7 @@ Rồi `import '@vietmap/optimize-sdk-elements'` và bind thẳng trong template 
 
 ## 5) Framework khác (Angular, Svelte, vanilla…)
 
-Cùng **một web component** cho mọi nơi — chỉ khác cú pháp bind. Quy tắc chung: **object/array → DOM property, chuỗi → attribute, sự kiện → listener**.
+Cùng **một web component** (`import '@vietmap/optimize-sdk/elements'`) cho mọi nơi — chỉ khác cú pháp bind. Quy tắc chung: **object/array → DOM property, chuỗi → attribute, sự kiện → listener**.
 
 | | `jobs` / `vehicles` (array) | `day` / key (chuỗi) | sự kiện |
 | --- | --- | --- | --- |
@@ -156,7 +158,7 @@ React là framework khó tính nhất với custom element, nên SDK **ship sẵ
 
 ```bash
 pnpm install
-pnpm build       # build core → react → elements
+pnpm build       # build @vietmap/optimize-sdk (core + elements + react)
 pnpm typecheck
 pnpm --dir examples/react-demo dev   # http://localhost:5180
 pnpm --dir examples/vue-demo dev     # http://localhost:5181
@@ -164,12 +166,12 @@ pnpm --dir examples/vue-demo dev     # http://localhost:5181
 
 ## Phát hành (versioning + npm)
 
-Quản lý version bằng [Changesets](https://github.com/changesets/changesets) — 3 package publishable **bump cùng một version**:
+Quản lý version bằng [Changesets](https://github.com/changesets/changesets):
 
 ```bash
 pnpm changeset          # ghi lại thay đổi (chọn major/minor/patch + mô tả)
-pnpm changeset:version  # áp changeset: bump version + sinh CHANGELOG + cập nhật dep nội bộ
-pnpm release            # build tất cả rồi publish lên npm theo đúng thứ tự phụ thuộc
+pnpm changeset:version  # áp changeset: bump version + sinh CHANGELOG
+pnpm release            # build rồi publish lên npm
 ```
 
 Cần `npm login` với quyền publish scope `@vietmap` trước khi chạy `pnpm release`.

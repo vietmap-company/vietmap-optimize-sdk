@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import type { OptimizeRequest, OptimizeResponse, SdkError } from '@vietmap/optimize-sdk'
+import type { OptimizeRequest, OptimizeResponse, SdkError } from '../index'
 import { useFleetworkClient } from './FleetworkProvider'
 
 export interface UseOptimizeResult {

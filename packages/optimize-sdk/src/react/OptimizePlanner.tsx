@@ -1,7 +1,7 @@
 import { createElement, useEffect, useRef } from 'react'
 import type { CSSProperties, ReactElement } from 'react'
 // Side-effect: registers <vietmap-optimize-planner> / <vietmap-route-map>.
-import '@vietmap/optimize-sdk-elements'
+import '../elements/index'
 import type {
   VietmapOptimizePlanner,
   PlannerVehicle,
@@ -11,7 +11,7 @@ import type {
   PlannerJobInput,
   PlannerConfirmPayload,
   StopRole,
-} from '@vietmap/optimize-sdk-elements'
+} from '../elements/index'
 
 /** Convenience inputs that don't require the `kind` discriminator. */
 type ServiceInput = Omit<PlannerService, 'kind'>

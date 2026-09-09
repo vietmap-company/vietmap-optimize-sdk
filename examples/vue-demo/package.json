@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@vietmap/optimize-sdk-elements": "workspace:*",
+    "@vietmap/optimize-sdk": "workspace:*",
     "vue": "^3.5.13"
   },
   "devDependencies": {

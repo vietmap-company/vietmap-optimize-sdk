@@ -7,7 +7,7 @@ import {
   formatArrival,
   formatDuration,
   formatDistance,
-} from '@vietmap/optimize-sdk'
+} from '../index'
 import type {
   PlannerService,
   PlannerShipment,
@@ -16,7 +16,7 @@ import type {
   PlannerVehicle,
   RouteStop,
   StopRole,
-} from '@vietmap/optimize-sdk'
+} from '../index'
 import './route-map'
 import type { MapRoute, MapStop } from './route-map'
 

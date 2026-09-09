@@ -1,27 +1,36 @@
 {
-  "name": "@vietmap/optimize-sdk-elements",
+  "name": "@vietmap/optimize-sdk",
   "version": "0.1.0",
-  "description": "Web components for the Fleetwork Optimize SDK — <vietmap-optimize-planner> / <vietmap-route-map> (Lit). Works in any framework + vanilla.",
+  "description": "SDK for the Fleetwork Optimize API (VROOM-style vehicle routing): headless core + web components + React bindings, in one package with subpath exports.",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "unpkg": "./dist/index.global.js",
   "jsdelivr": "./dist/index.global.js",
-  "sideEffects": true,
+  "sideEffects": [
+    "./dist/elements/*",
+    "./dist/react/*"
+  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "require": "./dist/index.cjs"
     },
+    "./elements": {
+      "types": "./dist/elements/index.d.ts",
+      "import": "./dist/elements/index.js",
+      "require": "./dist/elements/index.cjs"
+    },
     "./react": {
-      "types": "./react.d.ts",
-      "import": "./react.js",
-      "require": "./react.js"
-    }
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.js",
+      "require": "./dist/react/index.cjs"
+    },
+    "./package.json": "./package.json"
   },
-  "files": ["dist", "react.d.ts", "react.js"],
+  "files": ["dist"],
   "scripts": {
     "build": "tsup",
     "typecheck": "tsc --noEmit",
@@ -33,26 +42,28 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vietmap-company/vietmap-optimize-sdk.git",
-    "directory": "packages/elements"
+    "directory": "packages/optimize-sdk"
   },
   "homepage": "https://github.com/vietmap-company/vietmap-optimize-sdk#readme",
   "bugs": "https://github.com/vietmap-company/vietmap-optimize-sdk/issues",
   "engines": { "node": ">=18" },
-  "keywords": ["vietmap","fleetwork","optimize","vrp","web-component","custom-elements","lit","sdk"],
+  "keywords": ["vietmap","fleetwork","optimize","vrp","vehicle-routing","route-optimization","web-component","custom-elements","lit","react","sdk"],
   "dependencies": {
-    "lit": "^3.2.1",
-    "@vietmap/optimize-sdk": "workspace:*"
+    "lit": "^3.2.1"
   },
   "peerDependencies": {
-    "react": ">=18",
-    "@types/react": ">=18"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "peerDependenciesMeta": {
     "react": { "optional": true },
-    "@types/react": { "optional": true }
+    "react-dom": { "optional": true }
   },
   "devDependencies": {
-    "@types/react": "^19.0.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "tsup": "^8.0.0",
     "typescript": "~6.0.2"
   }
