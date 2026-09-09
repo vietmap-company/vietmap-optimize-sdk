@@ -1,6 +1,6 @@
 {
   "name": "@vietmap/optimize-sdk",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "SDK for the Fleetwork Optimize API (VROOM-style vehicle routing): headless core + web components + React bindings, in one package with subpath exports.",
   "type": "module",
   "main": "./dist/index.cjs",
