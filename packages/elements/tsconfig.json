@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    "useDefineForClassFields": false,
+    "experimentalDecorators": false,
+    "baseUrl": ".",
+    "paths": {
+      "@vietmap/optimize-sdk": ["../core/src/index"]
+    }
+  },
+  "include": ["src"]
+}

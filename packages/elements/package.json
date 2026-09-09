@@ -1,0 +1,59 @@
+{
+  "name": "@vietmap/optimize-sdk-elements",
+  "version": "0.1.0",
+  "description": "Web components for the Fleetwork Optimize SDK — <vietmap-optimize-planner> / <vietmap-route-map> (Lit). Works in any framework + vanilla.",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "unpkg": "./dist/index.global.js",
+  "jsdelivr": "./dist/index.global.js",
+  "sideEffects": true,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    },
+    "./react": {
+      "types": "./react.d.ts",
+      "import": "./react.js",
+      "require": "./react.js"
+    }
+  },
+  "files": ["dist", "react.d.ts", "react.js"],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": { "access": "public" },
+  "author": "VietMap",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vietmap-company/vietmap-optimize-sdk.git",
+    "directory": "packages/elements"
+  },
+  "homepage": "https://github.com/vietmap-company/vietmap-optimize-sdk#readme",
+  "bugs": "https://github.com/vietmap-company/vietmap-optimize-sdk/issues",
+  "engines": { "node": ">=18" },
+  "keywords": ["vietmap","fleetwork","optimize","vrp","web-component","custom-elements","lit","sdk"],
+  "dependencies": {
+    "lit": "^3.2.1",
+    "@vietmap/optimize-sdk": "workspace:*"
+  },
+  "peerDependencies": {
+    "react": ">=18",
+    "@types/react": ">=18"
+  },
+  "peerDependenciesMeta": {
+    "react": { "optional": true },
+    "@types/react": { "optional": true }
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "tsup": "^8.0.0",
+    "typescript": "~6.0.2"
+  }
+}
